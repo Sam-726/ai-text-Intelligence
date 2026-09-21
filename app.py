@@ -11,16 +11,20 @@ from ai_text_forensics.predict import predict_text
 
 MODEL_PATH = ROOT / "artifacts" / "svm_pipeline.joblib"
 
-st.set_page_config(page_title="AI Text Forensics", page_icon="🧪")
-st.title("🧪 AI Text Forensics")
-st.caption("Master's-level demonstration of interpretable text classification.")
+st.set_page_config(page_title="AI Text Intelligence", page_icon="🧠")
+st.title("🧠 AI Text Intelligence")
+st.caption("A small NLP/ML experiment for exploring patterns in written text.")
 
 if not MODEL_PATH.exists():
     st.warning("Model not found. Run python scripts/train.py first.")
     st.stop()
 
 model = load_model(MODEL_PATH)
-text = st.text_area("Enter text to analyze", height=220, placeholder="Paste a paragraph here...")
+text = st.text_area(
+    "Enter text to analyze",
+    height=220,
+    placeholder="Paste a paragraph here...",
+)
 
 if st.button("Analyze text", type="primary"):
     if not text.strip():
@@ -34,4 +38,8 @@ if st.button("Analyze text", type="primary"):
             st.info(result["confidence_note"])
 
 st.divider()
-st.markdown("**Important:** This is a learning/portfolio prototype. A small binary classifier cannot reliably determine authorship or the exact LLM source of arbitrary text.")
+st.markdown(
+    "**Important:** This is a learning/portfolio prototype. "
+    "A small binary classifier cannot reliably determine authorship or "
+    "identify the exact model that generated arbitrary text."
+)
